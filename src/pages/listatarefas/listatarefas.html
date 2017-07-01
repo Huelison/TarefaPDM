@@ -1,0 +1,48 @@
+<!--
+  Generated template for the Listatarefas page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+	<ion-navbar>
+		<ion-buttons end>
+			<button ion-button icon-only color="royal" (click)="filtrarTarefas()">
+        <ion-icon name="search"></ion-icon>
+      </button>
+		</ion-buttons>
+		<ion-title>
+			Tarefas PDM - Lista de Tarefas
+		</ion-title>
+	</ion-navbar>
+</ion-header>
+
+<ion-content padding>
+	<ion-list>
+		<ion-item-sliding *ngFor="let tarefa of tarefas | async">
+			<ion-item>
+				<ion-icon [color]="tarefa.status == 'finalizado' ? 'secondary' : 'dark'"  ios="ios-paper-outline" md="md-bookmark" item-left></ion-icon>
+				<h2>{{tarefa.title}}</h2>
+			</ion-item>
+			<ion-item-options side="left">
+				<button ion-button color="primary" (click)="editarTarefa(tarefa.$key)">
+					<ion-icon name="create"></ion-icon>
+					Editar
+		  	</button>
+				<button ion-button color="secondary" (click)="finalizarTarefa(tarefa.$key)">
+			<ion-icon name="checkmark-circle-outline"></ion-icon>
+			Finalizar
+		  </button>
+			</ion-item-options>
+			<ion-item-options side="right">
+				<button ion-button color="danger" (click)="excluirTarefa(tarefa.$key)">
+			<ion-icon name="trash"></ion-icon>
+			Excluir
+		  </button>
+			</ion-item-options>
+		</ion-item-sliding>
+	</ion-list>
+	<ion-fab right bottom>
+		<button ion-fab color="light" (click)="adicionarTarefa()"><ion-icon name="add"></ion-icon></button>
+	</ion-fab>
+</ion-content>
